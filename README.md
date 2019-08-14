@@ -1,8 +1,5 @@
 # Takeaway_Case_Study
 
-Takeaway Case Study
-=====================
-
 Case study: build a stack to get real time information online, store the data and present it graphically.
 
 
