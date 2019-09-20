@@ -1,0 +1,90 @@
+{
+	"family": "my-fargate-task",
+	"taskRoleArn": "arn:aws:iam::547369373092:role/myecs-task-execution-role",
+	"executionRoleArn": "arn:aws:iam::547369373092:role/myecs-task-execution-role",
+	"networkMode": "awsvpc",
+	"containerDefinitions": [{
+			"name": "airflow",
+			"image": "547369373092.dkr.ecr.us-east-1.amazonaws.com/repo-airflow",
+			"cpu": 128,
+			"memory": 512,
+			"portMappings": [{
+				"containerPort": 8080,
+				"hostPort": 8080,
+				"protocol": "tcp"
+			}],
+			"essential": true,
+			"privileged": false,
+			"readonlyRootFilesystem": false,
+			"interactive": true,
+			"pseudoTerminal": true,
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "/ecs/airflow-lg",
+					"awslogs-region": "us-east-1",
+					"awslogs-stream-prefix": "ecs"
+				}
+			}
+		},
+
+		{
+			"name": "mysql",
+			"image": "547369373092.dkr.ecr.us-east-1.amazonaws.com/repo-mysql",
+			"cpu": 128,
+			"memory": 512,
+			"portMappings": [{
+				"containerPort": 3306,
+				"hostPort": 3306,
+				"protocol": "tcp"
+			}],
+			"environment": [{
+				"name": "MYSQL_ROOT_PASSWORD",
+				"value": "mysql"
+			}],
+			"essential": true,
+			"privileged": false,
+			"readonlyRootFilesystem": false,
+			"interactive": true,
+			"pseudoTerminal": true,
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "/ecs/mysql-lg",
+					"awslogs-region": "us-east-1",
+					"awslogs-stream-prefix": "ecs"
+				}
+			}
+		},
+		{
+			"name": "webserver",
+			"image": "547369373092.dkr.ecr.us-east-1.amazonaws.com/repo-webserver",
+			"cpu": 128,
+			"memory": 512,
+			"portMappings": [{
+				"containerPort": 8081,
+				"hostPort": 8081,
+				"protocol": "tcp"
+			}],
+			"essential": true,
+			"privileged": false,
+			"readonlyRootFilesystem": false,
+			"interactive": true,
+			"pseudoTerminal": true,
+			"logConfiguration": {
+				"logDriver": "awslogs",
+				"options": {
+					"awslogs-group": "/ecs/web-lg",
+					"awslogs-region": "us-east-1",
+					"awslogs-stream-prefix": "ecs"
+				}
+			}
+		}
+
+	],
+	"requiresCompatibilities": [
+		"FARGATE"
+	],
+	"cpu": "512",
+	"memory": "2048"
+}
