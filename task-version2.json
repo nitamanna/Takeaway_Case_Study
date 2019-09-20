@@ -1,5 +1,5 @@
 {
-	"family": "my-fargate-task",
+	"family": "my-fargate-task-jenkins",
 	"taskRoleArn": "arn:aws:iam::547369373092:role/myecs-task-execution-role",
 	"executionRoleArn": "arn:aws:iam::547369373092:role/myecs-task-execution-role",
 	"networkMode": "awsvpc",
